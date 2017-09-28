@@ -54,7 +54,7 @@ namespace GTA.Extensions
         public CompositeDisposable CompositeDisposable { get; } = new CompositeDisposable();
 
         /// <summary>
-        /// Initializes a new instance of the ScriptEx class.
+        /// Initializes a new instance of the <see cref="ScriptEx"/> class.
         /// </summary>
         protected ScriptEx()
         {
