@@ -49,6 +49,11 @@ namespace GTA.Extensions
         public UniRx.IObservable<Unit> UpdateAsObservable { get; }
 
         /// <summary>
+        /// Gets the CompositeDisposable that disposes when this script ends.
+        /// </summary>
+        public CompositeDisposable CompositeDisposable { get; } = new CompositeDisposable();
+
+        /// <summary>
         /// Initializes a new instance of the ScriptEx class.
         /// </summary>
         protected ScriptEx()
@@ -89,11 +94,16 @@ namespace GTA.Extensions
             Update?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Disposes all disposables the CompositeDisposable contains.
+        /// </summary>
+        /// <param name="disposing">An boolean value that indicates whether the method was invoked from the <see cref="Script.Dispose"/> or from the finalizer.</param>
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
 
             Tick -= OnTick;
+            CompositeDisposable.Dispose();
         }
     }
 }
