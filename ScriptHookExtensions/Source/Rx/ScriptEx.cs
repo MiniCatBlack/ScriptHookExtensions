@@ -89,8 +89,10 @@ namespace GTA.Extensions
 
         private void OnTick(object sender, EventArgs args)
         {
+            preUpdateSubject.OnNext(Unit.Default);
             PreUpdate?.Invoke(this, EventArgs.Empty);
 
+            updateSubject.OnNext(Unit.Default);
             Update?.Invoke(this, EventArgs.Empty);
         }
 
