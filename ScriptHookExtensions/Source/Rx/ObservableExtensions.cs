@@ -58,5 +58,15 @@ namespace GTA.Extensions
         {
             return source.ResetAfter(default(TSource), dueTime, Scheduler.DefaultSchedulers.TimeBasedOperations);
         }
+
+        public static UniRx.IObservable<T> FirstOrEmpty<T>(this UniRx.IObservable<T> source)
+        {
+            return new FirstOrEmptyObservable<T>(source);
+        }
+
+        public static UniRx.IObservable<T> FirstOrEmpty<T>(this UniRx.IObservable<T> source, Func<T, bool> predicate)
+        {
+            return new FirstOrEmptyObservable<T>(source, predicate);
+        }
     }
 }

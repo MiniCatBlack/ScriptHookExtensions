@@ -55,6 +55,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="TestObserver.cs" />
     <Compile Include="Tests\CoroutineTest.cs" />
+    <Compile Include="Tests\FirstOrEmptyTest.cs" />
     <Compile Include="Tests\ResetAfterTest.cs" />
     <Compile Include="Tests\ToObservableTest.cs" />
     <Compile Include="Tests\ToYieldInstructionTest.cs" />
