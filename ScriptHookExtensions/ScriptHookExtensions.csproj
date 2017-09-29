@@ -49,7 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Rx\PriorityQueue.cs" />
+    <Compile Include="Source\Rx\ScheduledItem.cs" />
     <Compile Include="Source\Rx\ScriptEx.cs" />
+    <Compile Include="Source\Rx\ScriptScheduler.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
