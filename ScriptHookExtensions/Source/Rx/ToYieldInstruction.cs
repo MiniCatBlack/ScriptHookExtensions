@@ -8,7 +8,7 @@ namespace GTA.Extensions
     /// Provides a way to treat an observable stream as a coroutine.
     /// </summary>
     /// <typeparam name="T">The type of the source stream.</typeparam>
-    public class ToYieldInstruction<T> : IEnumerator<T>, IDisposable
+    public class YieldInstruction<T> : IEnumerator<T>, IDisposable
     {
         private readonly IDisposable subscription;
 
@@ -48,7 +48,7 @@ namespace GTA.Extensions
         /// </summary>
         public bool IsDone => HasError || HasResult;
 
-        internal ToYieldInstruction(UniRx.IObservable<T> source, bool rethrowOnError)
+        internal YieldInstruction(UniRx.IObservable<T> source, bool rethrowOnError)
         {
             this.rethrowOnError = rethrowOnError;
 
@@ -99,9 +99,9 @@ namespace GTA.Extensions
 
         internal class ObserverYieldInstruction : UniRx.IObserver<T>
         {
-            private readonly ToYieldInstruction<T> parent;
+            private readonly YieldInstruction<T> parent;
 
-            public ObserverYieldInstruction(ToYieldInstruction<T> parent)
+            public ObserverYieldInstruction(YieldInstruction<T> parent)
             {
                 this.parent = parent;
             }
