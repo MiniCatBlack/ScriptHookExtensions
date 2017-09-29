@@ -1,4 +1,6 @@
-﻿using System;
+﻿//  https://github.com/TORISOUP/UniRx/blob/13ea83b38c1bc3bede700a7da17e60f67c3c5f08/Dlls/UniRx.Library/Operators/ResetAfter.cs
+
+using System;
 using UniRx;
 using UniRx.Operators;
 
