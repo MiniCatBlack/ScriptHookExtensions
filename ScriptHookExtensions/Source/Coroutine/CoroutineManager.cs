@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace GTA.Extensions
 {
@@ -51,6 +52,39 @@ namespace GTA.Extensions
             }
 
             return handle;
+        }
+
+        /// <summary>
+        /// Waits for the specified dueTime.
+        /// </summary>
+        /// <param name="dueTime">The relative time for which the coroutine waits.</param>
+        /// <returns>An inner-coroutine to be used in the parent coroutine.</returns>
+        public IEnumerator Wait(TimeSpan dueTime)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            var totalMillisec = dueTime.TotalMilliseconds;
+
+            while (stopwatch.ElapsedMilliseconds < totalMillisec)
+            {
+                yield return null;
+            }
+
+            yield break;
+        }
+
+        /// <summary>
+        /// Waits for the specified dueFrame.
+        /// </summary>
+        /// <param name="dueFrame">The number of the frame for which the coroutine waits.</param>
+        /// <returns>An inner-coroutine to be used in the parent coroutine.</returns>
+        public IEnumerator Wait(int dueFrame)
+        {
+            for (int i = 0; i < dueFrame; i++)
+            {
+                yield return null;
+            }
+
+            yield break;
         }
 
         internal void Run()
