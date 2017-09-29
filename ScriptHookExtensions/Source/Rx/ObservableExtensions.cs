@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 
 namespace GTA.Extensions
 {
@@ -17,6 +18,45 @@ namespace GTA.Extensions
         public static YieldInstruction<T> ToYieldInstruction<T>(this UniRx.IObservable<T> source, bool rethrowOnError = false)
         {
             return new YieldInstruction<T>(source, rethrowOnError);
+        }
+
+        /// <summary>
+        /// Returns a stream that notifies the default value if no value is notified while the specified dueTime.
+        /// </summary>
+        /// <typeparam name="T">The type of notification value.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="defaultValue">The default value to notify.</param>
+        /// <param name="dueTime">The duration time to wait</param>
+        /// <param name="scheduler">The scheduler to run the timers on.</param>
+        /// <returns>A new observable sequence.</returns>
+        public static UniRx.IObservable<TSource> ResetAfter<TSource>(this UniRx.IObservable<TSource> source, TSource defaultValue, TimeSpan dueTime, IScheduler scheduler)
+        {
+            return new ResetAfterObservable<TSource>(source, defaultValue, dueTime, scheduler);
+        }
+
+        /// <summary>
+        /// Returns a stream that notifies the default value if no value is notified while the specified dueTime.
+        /// </summary>
+        /// <typeparam name="T">The type of notification value.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="defaultValue">The default value to notify.</param>
+        /// <param name="dueTime">The duration time to wait</param>
+        /// <returns>A new observable sequence.</returns>
+        public static UniRx.IObservable<TSource> ResetAfter<TSource>(this UniRx.IObservable<TSource> source, TSource defaultValue, TimeSpan dueTime)
+        {
+            return source.ResetAfter(defaultValue, dueTime, Scheduler.DefaultSchedulers.TimeBasedOperations);
+        }
+
+        /// <summary>
+        /// Returns a stream that notifies the default value if no value is notified while the specified dueTime.
+        /// </summary>
+        /// <typeparam name="T">The type of notification value.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="dueTime">The duration time to wait</param>
+        /// <returns>A new observable sequence.</returns>
+        public static UniRx.IObservable<TSource> ResetAfter<TSource>(this UniRx.IObservable<TSource> source, TimeSpan dueTime)
+        {
+            return source.ResetAfter(default(TSource), dueTime, Scheduler.DefaultSchedulers.TimeBasedOperations);
         }
     }
 }
