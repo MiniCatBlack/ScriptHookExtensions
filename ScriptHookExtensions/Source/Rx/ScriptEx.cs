@@ -9,6 +9,8 @@ namespace GTA.Extensions
     /// </summary>
     public abstract class ScriptEx : Script
     {
+        private readonly ScriptScheduler scheduler = new ScriptScheduler();
+
         private readonly Subject<Unit> preUpdateSubject = new Subject<Unit>();
 
         private readonly Subject<Unit> updateSubject = new Subject<Unit>();
@@ -54,6 +56,11 @@ namespace GTA.Extensions
         public CompositeDisposable CompositeDisposable { get; } = new CompositeDisposable();
 
         /// <summary>
+        /// Gets the scheduler that schedules work on the same thread as the this script runs.
+        /// </summary>
+        public IScheduler Scheduler => scheduler;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ScriptEx"/> class.
         /// </summary>
         protected ScriptEx()
@@ -91,6 +98,8 @@ namespace GTA.Extensions
         {
             preUpdateSubject.OnNext(Unit.Default);
             PreUpdate?.Invoke(this, EventArgs.Empty);
+
+            scheduler.Run();
 
             updateSubject.OnNext(Unit.Default);
             Update?.Invoke(this, EventArgs.Empty);
