@@ -58,10 +58,12 @@
     <Compile Include="Source\Coroutine\PrimaryCoroutine.cs" />
     <Compile Include="Source\Coroutine\ToObservable.cs" />
     <Compile Include="Source\Rx\DisposableExtensions.cs" />
+    <Compile Include="Source\Rx\ObservableExtensions.cs" />
     <Compile Include="Source\Rx\PriorityQueue.cs" />
     <Compile Include="Source\Rx\ScheduledItem.cs" />
     <Compile Include="Source\Rx\ScriptEx.cs" />
     <Compile Include="Source\Rx\ScriptScheduler.cs" />
+    <Compile Include="Source\Rx\ToYieldInstruction.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
