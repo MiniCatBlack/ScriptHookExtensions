@@ -61,6 +61,11 @@ namespace GTA.Extensions
         public IScheduler Scheduler => scheduler;
 
         /// <summary>
+        /// Gets the reference of <see cref="CoroutineManager"/>.
+        /// </summary>
+        public CoroutineManager Coroutine { get; } = new CoroutineManager();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ScriptEx"/> class.
         /// </summary>
         protected ScriptEx()
@@ -100,6 +105,7 @@ namespace GTA.Extensions
             PreUpdate?.Invoke(this, EventArgs.Empty);
 
             scheduler.Run();
+            Coroutine.Run();
 
             updateSubject.OnNext(Unit.Default);
             Update?.Invoke(this, EventArgs.Empty);
