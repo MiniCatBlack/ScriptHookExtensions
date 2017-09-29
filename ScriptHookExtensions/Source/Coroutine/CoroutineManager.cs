@@ -55,6 +55,24 @@ namespace GTA.Extensions
         }
 
         /// <summary>
+        /// Converts the specified coroutine to IObservable.
+        /// </summary>
+        /// <typeparam name="T">The type of the notification value.</typeparam>
+        /// <param name="coroutine">A coroutine to convert.</param>
+        /// <returns>An observable object that converted from the specified coroutine.</returns>
+        public UniRx.IObservable<T> ToObservable<T>(IEnumerable coroutine)
+            => ToObservable<T>(coroutine.GetEnumerator);
+
+        /// <summary>
+        /// Converts the specified coroutine to IObservable.
+        /// </summary>
+        /// <typeparam name="T">The type of the notification value.</typeparam>
+        /// <param name="coroutine">A coroutine to convert.</param>
+        /// <returns>An observable object that converted from the specified coroutine.</returns>
+        public UniRx.IObservable<T> ToObservable<T>(Func<IEnumerator> coroutine)
+            => new ToObservable<T>(this, coroutine);
+
+        /// <summary>
         /// Waits for the specified dueTime.
         /// </summary>
         /// <param name="dueTime">The relative time for which the coroutine waits.</param>
