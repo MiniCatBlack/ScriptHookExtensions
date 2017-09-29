@@ -1,5 +1,4 @@
 ﻿using System;
-using UniRx;
 
 namespace TestProject
 {
@@ -19,7 +18,7 @@ namespace TestProject
 
         public void OnError(Exception error)
         {
-            logger.Add($"OnError:{error}");
+            logger.Add($"OnError:{error.Message}");
         }
 
         public void OnCompleted()
