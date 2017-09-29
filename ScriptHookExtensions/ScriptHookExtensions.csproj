@@ -56,6 +56,7 @@
     <Compile Include="Source\Coroutine\EnumeratorExtensions.cs" />
     <Compile Include="Source\Coroutine\InnerCoroutine.cs" />
     <Compile Include="Source\Coroutine\PrimaryCoroutine.cs" />
+    <Compile Include="Source\Coroutine\ToObservable.cs" />
     <Compile Include="Source\Rx\DisposableExtensions.cs" />
     <Compile Include="Source\Rx\PriorityQueue.cs" />
     <Compile Include="Source\Rx\ScheduledItem.cs" />
