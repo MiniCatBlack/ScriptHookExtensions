@@ -55,6 +55,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="TestObserver.cs" />
     <Compile Include="Tests\CoroutineTest.cs" />
+    <Compile Include="Tests\ToObservableTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
