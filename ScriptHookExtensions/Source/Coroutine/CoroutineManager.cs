@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace GTA.Extensions
 {
     /// <summary>
-    /// Provides the functionality for coroutine-based scripting.
+    /// Provides functionalities for coroutine-based scripting.
     /// </summary>
     public class CoroutineManager
     {
@@ -19,7 +19,7 @@ namespace GTA.Extensions
         private bool IsRunning => current != null;
 
         /// <summary>
-        /// Gets the integer that indicates the number of active coroutines.
+        /// Gets an integer that indicates the number of active coroutines.
         /// </summary>
         public int Count => list.Count;
 
@@ -27,7 +27,7 @@ namespace GTA.Extensions
         /// Start the specific coroutine.
         /// </summary>
         /// <param name="coroutine">A coroutine to start.</param>
-        /// <returns>The CoroutineHandle to handle the specified coroutine.</returns>
+        /// <returns>A <see cref="CoroutineHandle"/> object to handle the specified coroutine.</returns>
         public CoroutineHandle Start(IEnumerable coroutine)
             => Start(coroutine.GetEnumerator());
 
@@ -35,7 +35,7 @@ namespace GTA.Extensions
         /// Start the specific coroutine.
         /// </summary>
         /// <param name="coroutine">A coroutine to start.</param>
-        /// <returns>The CoroutineHandle to handle the specified coroutine.</returns>
+        /// <returns>A <see cref="CoroutineHandle"/> object to handle the specified coroutine.</returns>
         public CoroutineHandle Start(IEnumerator coroutine)
         {
             if (IsRunning)
@@ -55,20 +55,20 @@ namespace GTA.Extensions
         }
 
         /// <summary>
-        /// Converts the specified coroutine to IObservable.
+        /// Converts the specified coroutine to <see cref="UniRx.IObservable{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of the notification value.</typeparam>
         /// <param name="coroutine">A coroutine to convert.</param>
-        /// <returns>An observable object that converted from the specified coroutine.</returns>
+        /// <returns>An observable stream that is converted from the specified coroutine.</returns>
         public UniRx.IObservable<T> ToObservable<T>(IEnumerable coroutine)
             => ToObservable<T>(coroutine.GetEnumerator);
 
         /// <summary>
-        /// Converts the specified coroutine to IObservable.
+        /// Converts the specified coroutine to <see cref="UniRx.IObservable{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of the notification value.</typeparam>
         /// <param name="coroutine">A coroutine to convert.</param>
-        /// <returns>An observable object that converted from the specified coroutine.</returns>
+        /// <returns>An observable stream that is converted from the specified coroutine.</returns>
         public UniRx.IObservable<T> ToObservable<T>(Func<IEnumerator> coroutine)
             => new ToObservable<T>(this, coroutine);
 
@@ -76,7 +76,7 @@ namespace GTA.Extensions
         /// Waits for the specified dueTime.
         /// </summary>
         /// <param name="dueTime">The relative time for which the coroutine waits.</param>
-        /// <returns>An inner-coroutine to be used in the parent coroutine.</returns>
+        /// <returns>A coroutine that lasts until <paramref name="dueTime"/> elapses.</returns>
         public IEnumerator Wait(TimeSpan dueTime)
         {
             var stopwatch = Stopwatch.StartNew();
@@ -94,7 +94,7 @@ namespace GTA.Extensions
         /// Waits for the specified dueFrame.
         /// </summary>
         /// <param name="dueFrame">The number of the frame for which the coroutine waits.</param>
-        /// <returns>An inner-coroutine to be used in the parent coroutine.</returns>
+        /// <returns>A coroutine that lasts until <paramref name="dueFrame"/> has elapsed.</returns>
         public IEnumerator Wait(int dueFrame)
         {
             for (int i = 0; i < dueFrame; i++)

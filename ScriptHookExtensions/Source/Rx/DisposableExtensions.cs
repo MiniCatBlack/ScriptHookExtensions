@@ -8,13 +8,13 @@ namespace GTA.Extensions
     public static class DisposableExtensions
     {
         /// <summary>
-        /// Adds the source disposable to the <see cref="ScriptEx.CompositeDisposable"/>.
+        /// Adds a disposable to <see cref="ScriptEx.CompositeDisposable"/>.
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
-        /// <param name="source">The target disposable to add.</param>
-        /// <param name="script">The target <see cref="ScriptEx"/>.</param>
-        /// <returns>The same object as source.</returns>
-        public static TSource AddTo<TSource>(this TSource source, ScriptEx script) where TSource : IDisposable
+        /// <typeparam name="T">The type of <paramref name="source"/>.</typeparam>
+        /// <param name="source">A disposable object to add.</param>
+        /// <param name="script">The reference of the target <see cref="ScriptEx"/>.</param>
+        /// <returns>The same object as <paramref name="source"/>.</returns>
+        public static T AddTo<T>(this T source, ScriptEx script) where T : IDisposable
         {
             if (source != null && script != null)
             {

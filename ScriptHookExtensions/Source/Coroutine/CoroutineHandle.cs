@@ -3,7 +3,7 @@
 namespace GTA.Extensions
 {
     /// <summary>
-    /// Provides methods to handle the coroutine.
+    /// Provides methods to handle a coroutine.
     /// </summary>
     public abstract class CoroutineHandle
     {

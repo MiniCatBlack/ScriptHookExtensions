@@ -56,7 +56,7 @@ namespace GTA.Extensions
         public CompositeDisposable CompositeDisposable { get; } = new CompositeDisposable();
 
         /// <summary>
-        /// Gets the scheduler that schedules work on the same thread as the this script runs.
+        /// Gets the scheduler that schedules work on the same thread as the current script runs.
         /// </summary>
         public IScheduler Scheduler => scheduler;
 
@@ -72,7 +72,7 @@ namespace GTA.Extensions
         {
             Tick += OnTick;
 
-            AbortedAsObservable =Observable.FromEvent<EventHandler, EventArgs>(
+            AbortedAsObservable = Observable.FromEvent<EventHandler, EventArgs>(
                 onNext => (sender, eventArgs) => onNext(eventArgs),
                 handler => Aborted += handler,
                 handler => Aborted -= handler)
@@ -114,7 +114,7 @@ namespace GTA.Extensions
         /// <summary>
         /// Disposes all disposables the CompositeDisposable contains.
         /// </summary>
-        /// <param name="disposing">An boolean value that indicates whether the method was invoked from the <see cref="Script.Dispose"/> or from the finalizer.</param>
+        /// <param name="disposing">A boolean value that indicates whether this method was invoked from Dispose() or from the finalizer.</param>
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
