@@ -3,7 +3,7 @@
 namespace GTA.Extensions
 {
     /// <summary>
-    /// Indicates the state of coroutine.
+    /// Indicates the state of a coroutine.
     /// </summary>
     public enum CoroutineState
     {

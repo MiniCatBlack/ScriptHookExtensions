@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace GTA.Extensions
 {
     /// <summary>
-    /// Provides a way to treat an observable stream as a coroutine.
+    /// Provides a way to treat an observable sequence as a coroutine.
     /// </summary>
-    /// <typeparam name="T">The type of the source stream.</typeparam>
+    /// <typeparam name="T">The type of the source observable sequence.</typeparam>
     public class YieldInstruction<T> : IEnumerator<T>, IDisposable
     {
         private readonly IDisposable subscription;
@@ -24,27 +24,27 @@ namespace GTA.Extensions
         public T Current { get; private set; }
 
         /// <summary>
-        /// Gets a boolean value that indicates whether the coroutine has an error.
+        /// Gets a value that indicates whether the coroutine has an error.
         /// </summary>
         public bool HasError => Error != null;
 
         /// <summary>
-        /// Gets the exception object that the stream notified.
+        /// Gets an exception object.
         /// </summary>
         public Exception Error { get; private set; }
 
         /// <summary>
-        /// Gets a boolean value that indicates whether the coroutine has a result.
+        /// Gets a value that indicates whether the coroutine has a result.
         /// </summary>
         public bool HasResult { get; private set; }
 
         /// <summary>
-        /// Gets the last value that the stream notified.
+        /// Gets the last element of the source observable sequence.
         /// </summary>
         public T Result { get; private set; }
 
         /// <summary>
-        /// Gets a boolean value that indicates whether the coroutine ended.
+        /// Gets a value that indicates whether the coroutine has already ended.
         /// </summary>
         public bool IsDone => HasError || HasResult;
 
@@ -66,9 +66,9 @@ namespace GTA.Extensions
         }
 
         /// <summary>
-        /// Moves the enumerator until the stream notifies OnError or OnCompleted.
+        /// Moves the enumerator until the source observable sequence notifies OnError or OnCompleted.
         /// </summary>
-        /// <returns>An boolean value that indicates whether the coroutine lasts.</returns>
+        /// <returns>A value that indicates whether the coroutine lasts.</returns>
         public bool MoveNext()
         {
             if (!moveNext)
@@ -85,7 +85,7 @@ namespace GTA.Extensions
         }
 
         /// <summary>
-        /// Unsubscribes the subscription of the source stream.
+        /// Unsubscribes the subscription of the source observable sequence.
         /// </summary>
         public void Dispose()
         {
